@@ -1,0 +1,98 @@
+{% extends 'base_generic.html' %} 
+
+{% block content %}
+{% load static %}
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2>{{ genre.name }}</h2>
+                    <span>{{ genre.short_bio }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+
+<!-- ***** Products Area Starts ***** -->
+<section class="section" id="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Our Latest Products</h2>
+                    <span>Check out all of our products.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% load humanize %}
+            {% if book_list %}
+                {% for book in book_list %}
+                <div class="col-lg-4">
+                    <div class="item">
+                        <div class="thumb">
+                            <div class="hover-content">
+                                <ul>
+                                    <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <img style="width: 350px; height: 369px;" src="{{ book.image.url }}" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4> {{ book.title }}</h4>
+                            {% if book.discount %}
+                                <span>{{ book.get_discount_price|intcomma }}đ - <del>{{ book.price|intcomma }}đ</del></span>
+                            {% else %}
+                                <span>{{ book.price|intcomma }}đ</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h4>Opps! We're sorry, this genre is out of stock!</h4>
+            {% endif %}
+            
+            <!-- Pagination Starts -->
+            {% block pagination %}
+                {% if is_paginated %}
+                <div class="col-lg-12">
+                    <div class="pagination">
+                        <ul>
+                            <li>
+                                {% if page_obj.has_previous %}
+                                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}"><</a>
+                                {% else %}
+                                <a href=""><</a>
+                                {% endif %}
+                            </li>
+                            <li class="active">
+                                <a href="#">{{ page_obj.number }}</a>
+                            </li>
+                            <li>
+                                {% if page_obj.has_next %}
+                                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">></a>
+                                {% else %}
+                                <a href="">></a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            {% endblock %}
+            <!-- Pagination Ends -->
+        </div>
+    </div>
+</section>
+<!-- ***** Products Area Ends ***** -->
+{% endblock %}

@@ -1,0 +1,394 @@
+{% extends 'base_generic.html' %}
+
+{% block content %} 
+    <!-- ***** Main Banner Area Start ***** -->
+    {% load static %}
+    <div class="main-banner" id="top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <div class="thumb">
+                            <div class="inner-content">
+                                <h4>We Are Hexabook</h4>
+                                <span>Awesome, clean &amp; creative HTML5 Template</span>
+                                <div class="main-border-button">
+                                    <a href="{% url 'books' %}">Khám phá ngay!</a>
+                                </div>
+                            </div>
+                            <img  src="{% static 'images/left-banner-image.jpg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>Science Fiction</h4>
+                                            <span>Best Books For Science Fiction</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Science Fiction</h4>
+                                                <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
+                                                <div class="main-border-button">
+                                                    <a href="{% url 'books-gen' 'science' %}">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img style="width: 350px; height: 300px;" src="{% static 'images/baner-right-image-01.jpg' %}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>Vietnam</h4>
+                                            <span>Best Books of Vietnam</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Vietnam</h4>
+                                                <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
+                                                <div class="main-border-button">
+                                                    <a href="{% url 'books-gen' 'vietnam' %}">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img style="width: 350px; height: 300px;" src="{% static 'images/baner-right-image-02.jpg' %}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>Life</h4>
+                                            <span>Best Books For Life</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Life</h4>
+                                                <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
+                                                <div class="main-border-button">
+                                                    <a href="{% url 'books-gen' 'life' %}">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img style="width: 350px; height: 300px;" src="{% static 'images/baner-right-image-03.jpg' %}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>Contact us</h4>
+                                            <span>Best Trend Accessories</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Contact us</h4>
+                                                <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
+                                                <div class="main-border-button">
+                                                    <a href="{% url 'contact' %}">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img style="width: 350px; height: 300px;" src="{% static 'images/baner-right-image-04.jpg' %}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** Huyen Bi Ky Ao Starts ***** -->
+    <section class="section" id="men">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h2>HUYỀN BÍ - KỲ ẢO</h2>
+                        <span>Ma thuật và những thần thoại</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="men-item-carousel">
+                        <div class="owl-men-item owl-carousel">
+                            {% load humanize %}
+                            {% for book in science_books %}
+                            <div class="item">
+                                <div class="thumb">
+                                    <div class="hover-content">
+                                        <ul>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <img style="height: 434px; width: 350px;" src="{{book.image.url}}" >
+                                </div>
+                                <div class="down-content">
+                                    <h5>{{ book.title }}</h5>
+                                    {% if book.discount %}
+                                        <span>{{ book.get_discount_price|intcomma }}đ - <del>{{ book.price|intcomma }}đ</del></span>
+                                    {% else %}
+                                        <span>{{ book.price|intcomma }}đ</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Huyen Bi Ky Ao Area Ends ***** -->
+
+    <!-- ***** Van hoc Viet Nam Area Starts ***** -->
+    <section class="section" id="women">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h2>VĂN HỌC VIỆT NAM</h2>
+                        <span>Bởi vì Việt Nam là cả thế giới</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="women-item-carousel">
+                        <div class="owl-women-item owl-carousel">
+                            {% for book in vn_books %}
+                            <div class="item">
+                                <div class="thumb">
+                                    <div class="hover-content">
+                                        <ul>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <img style="height: 434px; width: 350px;" src="{{ book.image.url }}" >
+                                </div>
+                                <div class="down-content">
+                                    <h5>{{ book.title }}</h5>
+                                    {% if book.discount %}
+                                        <span>{{ book.get_discount_price|intcomma }}đ - <del>{{ book.price|intcomma }}đ</del></span>
+                                    {% else %}
+                                        <span>{{ book.price|intcomma }}đ</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Van hoc Viet Nam Area Ends ***** -->
+
+    <!-- ***** Doi Song Area Starts ***** -->
+    <section class="section" id="kids">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h2>ĐỜI SỐNG</h2>
+                        <span>Cuộc sống hàng ngày, thật đơn giản, thật tinh tế</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="kid-item-carousel">
+                        <div class="owl-kid-item owl-carousel">
+                            {% for book in life_books %}
+                            <div class="item">
+                                <div class="thumb">
+                                    <div class="hover-content">
+                                        <ul>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="{{ book.get_absolute_url }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <img style="height: 434px; width: 350px;" src="{{ book.image.url }}" >
+                                </div>
+                                <div class="down-content">
+                                    <h5>{{ book.title }}</h5>
+                                    {% if book.discount %}
+                                        <span>{{ book.get_discount_price|intcomma }}đ - <del>{{ book.price|intcomma }}đ</del></span>
+                                    {% else %}
+                                        <span>{{ book.price|intcomma }}đ</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Doi Song Area Ends ***** -->
+
+    <!-- ***** Social Area Starts ***** -->
+    <section class="section" id="social">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>Social Media</h2>
+                        <span>Details to details is what makes Hexashop different from the other themes.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row images">
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Fashion</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="{% static 'images/instagram-01.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>New</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="{% static 'images/instagram-02.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Brand</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="{% static 'images/instagram-03.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Makeup</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="{% static 'images/instagram-04.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Leather</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="{% static 'images/instagram-05.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Bag</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="{% static 'images/instagram-06.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Social Area Ends ***** -->
+{% endblock %}
+
+{% block subscription %}
+<!-- ***** Subscribe Area Starts ***** -->
+<div class="subscribe">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="section-heading">
+                    <h2>By Subscribing To Our Newsletter You Can Get 30% Off</h2>
+                    <span>Details to details is what makes Hexashop different from the other themes.</span>
+                </div>
+                <form id="subscribe" action="" method="get">
+                    <div class="row">
+                      <div class="col-lg-5">
+                        <fieldset>
+                          <input name="name" type="text" id="name" placeholder="Your Name" required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-5">
+                        <fieldset>
+                          <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-2">
+                        <fieldset>
+                          <button type="submit" id="form-submit" class="main-dark-button"><i class="fa fa-paper-plane"></i></button>
+                        </fieldset>
+                      </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-6">
+                        <ul>
+                            <li>Store Location:<br><span>Sunny Isles Beach, FL 33160, United States</span></li>
+                            <li>Phone:<br><span>010-020-0340</span></li>
+                            <li>Office Location:<br><span>North Miami Beach</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul>
+                            <li>Work Hours:<br><span>07:30 AM - 9:30 PM Daily</span></li>
+                            <li>Email:<br><span>info@company.com</span></li>
+                            <li>Social Media:<br><span><a href="#">Facebook</a>, <a href="#">Instagram</a>, <a href="#">Behance</a>, <a href="#">Linkedin</a></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Subscribe Area Ends ***** -->
+{% endblock %}
